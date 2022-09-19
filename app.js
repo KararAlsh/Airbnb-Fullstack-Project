@@ -45,9 +45,26 @@ mongoose.connect(
 require('./express-sessions')(app)
 
 // Routes
-
 // ::::
 // Create your routes here
+app.get('/', (req, res) => {
+  res.render('')
+})
+app.get('/auth', (req, res) => {
+  res.render('')
+})
+app.get('/bookings', (req, res) => {
+  res.render('')
+})
+app.get('/houses', (req, res) => {
+  res.render('')
+})
+app.get('/profile', (req, res) => {
+  res.render('')
+})
+app.get('/reviews', (req, res) => {
+  res.render('')
+})
 // ::::
 
 // Catch 404 and forward to error handler
