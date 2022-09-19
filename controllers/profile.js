@@ -4,7 +4,11 @@ const router = express.Router()
 
 // get controller
 router.get('/', (req, res) => {
-  res.send('Hello from Housev')
+  res.render('/')
+})
+
+router.patch('/', (req, res) => {
+  res.render('/')
 })
 // Export
 module.exports = router

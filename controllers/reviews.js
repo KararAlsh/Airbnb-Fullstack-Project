@@ -6,5 +6,9 @@ const router = express.Router()
 router.get('/', (req, res) => {
   res.send('Hello from Housec')
 })
+
+router.post('/', (req, res) => {
+  res.render('/')
+})
 // Export
 module.exports = router
