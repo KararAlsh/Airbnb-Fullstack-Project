@@ -20,14 +20,14 @@ module.exports = mongoose.model('houses', {
     type: String,
     required: true
   },
-  photos: [(type: String)],
+  photos: [{ type: String }],
 
   price: {
     type: Number,
     required: true
   },
   rooms: {
-    type: String,
+    type: Number,
     required: true
   },
   title: {
