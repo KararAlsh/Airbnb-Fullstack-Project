@@ -1,0 +1,132 @@
+  <nav>
+      <div class="container py-2">
+        <div class="row">
+          <div class="col text-start">
+            <a href="houses"><img
+							class="airbnb-logo"
+							src="/images/logo-airbnb.png"
+							alt="Airbnb"
+						/></a>
+          </div>
+          <div class="col text-end">
+            <a href="houses/profile" class="btn btn-outline-secondary btn-sm">
+              <img
+              class="userlogo"src=https://randomuser.me/api/portraits/men/11.jpg><small
+                >User name</small
+              ></a
+            >
+            <a href="auth/login" class="btn btn-outline-secondary btn-sm">
+              <small>Logout</small></a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- end top nav -->
+    <div class="container mt-4">
+      <div class="row">
+        <div class="col-3">
+          <form>
+            <h2 class="border-bottom pb-3">Profile</h2>
+            <label class="form-label mb-0"><small>Name</small></label>
+            <input type="text" class="form-control mb-3" />
+            <label class="form-label mb-0"><small>Email</small></label>
+            <input type="email" class="form-control mb-3" />
+            <label class="form-label mb-0"
+              ><small>Profile Picture</small></label
+            >
+            <div class="">
+              <img class="userlogo-profile-pg
+              my-2"src=https://randomuser.me/api/portraits/men/11.jpg>
+            </div>
+            <input type="text" class="form-control mb-3" />
+            <div>
+              <button type="button" class="btn btn-success btn-sm">
+                Save Changes
+              </button>
+            </div>
+          </form>
+        </div>
+        <div class="col-7 offset-2">
+          <h2 class="border-bottom pb-3">My Listings</h2>
+          <div>
+						<a href="/houses/create"><button type="button" class="btn btn-success btn-sm mb-3 mt-1">
+              List a house
+            </button></a>
+            <!-- card 1 -->
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
+
+		"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Luxary Villa in Chaweng</h5>
+                    <small class="text-muted">Koh Samui • 4 Rooms</small>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                    <a
+                      href="edit"
+                      class="btn btn-outline-secondary btn-sm"
+                    >
+                      <small>Edit</small></a
+                    >
+                    <a href="#" class="btn btn-outline-secondary btn-sm">
+                      <small>View</small></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of card 1 -->
+            <!-- card 2 -->
+            <div class="card mb-3" style="max-width: 540px;">
+              <div class="row g-0">
+                <div class="col-md-4">
+                  <img
+                    src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295027/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2002/house_02_01.png"
+                    class="card-img-top"
+                    class="img-fluid rounded-start"
+                    alt="..."
+                  />
+                </div>
+                <div class="col-md-8">
+                  <div class="card-body">
+                    <h5 class="card-title">Private Villa Lotus 1</h5>
+                    <small class="text-muted">Koh Phangan • 3 Rooms</small>
+                    <p class="card-text">
+                      This is a wider card with supporting text below as a
+                      natural lead-in to additional content. This content is a
+                      little bit longer.
+                    </p>
+                    <a
+                      href="edit"
+                      class="btn btn-outline-secondary btn-sm"
+                    >
+                      <small>Edit</small></a
+                    >
+                    <a href="#" class="btn btn-outline-secondary btn-sm">
+                      <small>View</small></a
+                    >
+                  </div>
+                </div>
+              </div>
+            </div>
+            <!-- end of card 2 -->
+            <!-- if u dont have any houses listed -->
+            <!-- <div class="alert alert-light border border-light" role="alert">
+              You don't have any houses listed
+            </div> -->
+          </div>
+        </div>
+      </div>
+    </div>

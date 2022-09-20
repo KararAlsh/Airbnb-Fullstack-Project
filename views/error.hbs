@@ -1,2 +1,25 @@
-{{message}}
-{{error.stack}}
+<nav>
+      <div class="container py-2">
+        <div class="row">
+          <div class="col text-start">
+            <a href="houses"><img
+							class="airbnb-logo"
+							src="/images/logo-airbnb.png"
+							alt="Airbnb"
+						/></a>
+          </div>
+          <div class="col text-end">
+            <a href="login" class="btn btn-outline-secondary btn-sm">
+              <small>Login</small></a
+            >
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!-- end top nav -->
+    <div class="container mt-4">
+      <div class="alert alert-danger" role="alert">
+        {{message}}
+				{{error.stack}}
+      </div>
+    </div>

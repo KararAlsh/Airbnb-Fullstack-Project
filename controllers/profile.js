@@ -4,11 +4,9 @@ const router = express.Router()
 
 // get controller
 router.get('/', (req, res) => {
-  res.render('/')
+  res.render('profile')
 })
 
-router.patch('/', (req, res) => {
-  res.render('/')
-})
+router.patch('/', (req, res) => {})
 // Export
 module.exports = router

@@ -4,7 +4,7 @@ const router = express.Router()
 
 // get controller
 router.post('/', (req, res) => {
-  res.send('Hello from Housem')
+  res.render('/')
 })
 // Export
 module.exports = router

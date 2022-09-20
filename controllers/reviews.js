@@ -4,11 +4,9 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.send('Hello from Housec')
-})
-
-router.post('/', (req, res) => {
   res.render('/')
 })
+
+router.post('/', (req, res) => {})
 // Export
 module.exports = router

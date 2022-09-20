@@ -4,31 +4,25 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.render('/')
+  res.render('houses/list')
 })
 
 router.get('/create', (req, res) => {
-  res.render('../views/create')
+  res.render('houses/create')
 })
 
 router.get('/:id', (req, res) => {
-  res.render('../views/')
+  res.render('houses/one')
 })
 
 router.get('/:id/edit', (req, res) => {
-  res.render('../views/')
+  res.render('houses/edit')
 })
 
-router.post('/', (req, res) => {
-  res.render('../views/')
-})
+router.post('/', (req, res) => {})
 
-router.patch('/:id', (req, res) => {
-  res.render('../views/')
-})
+router.patch('/:id', (req, res) => {})
 
-router.delete('/:id', (req, res) => {
-  res.render('../views/')
-})
+router.delete('/:id', (req, res) => {})
 // Export
 module.exports = router
