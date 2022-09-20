@@ -15,15 +15,23 @@ router.get('/signup', (req, res) => {
 
 router.post('/login', (req, res) => {})
 
-router.post('/signup', async (req, res) => {
+router.post('/signup', async (req, res, next) => {
   console.log(req.body)
   let user = await users.create(req.body)
   console.log('done')
   req.login(user, err => {
-    if (err) {
-      throw err
-    } else {
-      res.redirect('/houses')
+    try {
+      if (
+        users.findOne({
+          email: req.body.email
+        })
+      ) {
+        throw new Error('User with this email already exists')
+      } else {
+        res.redirect('/houses')
+      }
+    } catch (err) {
+      next(err)
     }
   })
 })
