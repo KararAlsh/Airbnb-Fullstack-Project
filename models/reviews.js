@@ -9,8 +9,9 @@ module.exports = mongoose.model('reviews', {
     ref: 'users'
   },
   date: {
-    type: date,
-    required: true
+    type: Date,
+    required: true,
+    default: Date.now
   },
   description: {
     type: String,
