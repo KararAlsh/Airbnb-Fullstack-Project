@@ -11,21 +11,22 @@
 								/></a>
               </div>
               <div class="card-body text-start">
-                <form>
+                <form action="/auth/signup" method="post" name="signup">
                   <div class="mb-1">
                     <label class="form-label mb-0">Your full name</label>
-                    <input type="text" class="form-control" />
+                    <input name="name" type="text" class="form-control" />
                     <label class="form-label mb-0">Profile Picture</label>
                     <input
+											name="avatar"
                       type="text"
                       class="form-control"
-                      placeholder="http..."
+                      placeholder="https://..."
                     />
                     <label class="form-label mb-0">Email</label>
-                    <input type="email" class="form-control" />
+                    <input name="email" type="email" class="form-control" />
                     <label class="form-label mb-0 mt-3">Password</label>
-                    <input type="password" class="form-control" />
-                    <button type="button" class="btn btn-success mt-3">
+                    <input name="password" type="password" class="form-control" />
+                    <button class="btn btn-success mt-3">
                       <small>Signup</small>
                     </button>
                     <div class="mt-3">
