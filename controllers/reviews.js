@@ -4,7 +4,7 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.render('/')
+  res.render('reviews')
 })
 
 router.post('/', (req, res) => {})
