@@ -5,7 +5,8 @@ const router = express.Router()
 // get controller
 router.get('/', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./profile')
+    let loggedUser = req.user
+    res.render('./profile', { loggedUser })
   } else {
     res.redirect('/auth/login')
   }

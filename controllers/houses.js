@@ -4,24 +4,28 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.render('houses/list')
+  let loggedUser = req.user
+  res.render('houses/list', { loggedUser })
 })
 
 router.get('/create', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./houses/create')
+    let loggedUser = req.user
+    res.render('./houses/create', { loggedUser })
   } else {
     res.redirect('../auth/login')
   }
 })
 
 router.get('/:id', (req, res) => {
-  res.render('houses/one')
+  let loggedUser = req.user
+  res.render('houses/one', { loggedUser })
 })
 
 router.get('/:id/edit', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./houses/edit')
+    let loggedUser = req.user
+    res.render('./houses/edit', { loggedUser })
   } else {
     res.redirect('/auth/login')
   }
@@ -29,7 +33,8 @@ router.get('/:id/edit', (req, res) => {
 
 router.post('/', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./houses')
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
   } else {
     res.redirect('/auth/login')
   }
@@ -37,7 +42,8 @@ router.post('/', (req, res) => {
 
 router.patch('/:id', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./houses')
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
   } else {
     res.redirect('/auth/login')
   }
@@ -45,7 +51,8 @@ router.patch('/:id', (req, res) => {
 
 router.delete('/:id', (req, res) => {
   if (req.isAuthenticated()) {
-    res.render('./houses')
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
   } else {
     res.redirect('/auth/login')
   }

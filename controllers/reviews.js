@@ -4,7 +4,8 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.render('reviews')
+  let loggedUser = req.user
+  res.render('reviews', { loggedUser })
 })
 
 router.post('/', (req, res) => {})
