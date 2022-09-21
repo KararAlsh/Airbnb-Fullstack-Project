@@ -4,25 +4,58 @@ const router = express.Router()
 
 //get controller
 router.get('/', (req, res) => {
-  res.render('houses/list')
+  let loggedUser = req.user
+  res.render('houses/list', { loggedUser })
 })
 
 router.get('/create', (req, res) => {
-  res.render('houses/create')
+  if (req.isAuthenticated()) {
+    let loggedUser = req.user
+    res.render('./houses/create', { loggedUser })
+  } else {
+    res.redirect('../auth/login')
+  }
 })
 
 router.get('/:id', (req, res) => {
-  res.render('houses/one')
+  let loggedUser = req.user
+  res.render('houses/one', { loggedUser })
 })
 
 router.get('/:id/edit', (req, res) => {
-  res.render('houses/edit')
+  if (req.isAuthenticated()) {
+    let loggedUser = req.user
+    res.render('./houses/edit', { loggedUser })
+  } else {
+    res.redirect('/auth/login')
+  }
 })
 
-router.post('/', (req, res) => {})
+router.post('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 
-router.patch('/:id', (req, res) => {})
+router.patch('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 
-router.delete('/:id', (req, res) => {})
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    let loggedUser = req.user
+    res.render('./houses', { loggedUser })
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 // Export
 module.exports = router

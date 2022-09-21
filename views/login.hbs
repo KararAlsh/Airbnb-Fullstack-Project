@@ -11,18 +11,18 @@
 								/></a>
               </div>
               <div class="card-body text-start">
-                <form>
+                <form action="/auth/login" method="post">
                   <div class="mb-1">
                     <label class="form-label mb-0">Email</label>
-                    <input type="email" class="form-control" />
+                    <input name="email" type="email" class="form-control" required />
                     <label class="form-label mb-0 mt-3">Password</label>
-                    <input type="password" class="form-control" />
-                    <button type="button" class="btn btn-success mt-3">
+                    <input name="password" type="password" class="form-control" required />
+                    <button class="btn btn-success mt-3">
                       <small>Login</small>
                     </button>
                     <div class="mt-3">
                       <small><strong>New to Airbnb?</strong></small>
-                      <a href="auth/signup"><small>Signup</small></a>
+                      <a href="signup"><small>Signup</small></a>
                     </div>
                   </div>
                 </form>
