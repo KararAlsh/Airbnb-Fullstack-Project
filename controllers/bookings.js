@@ -4,7 +4,11 @@ const router = express.Router()
 
 // get controller
 router.post('/', (req, res) => {
-  res.render('/')
+  if (req.isAuthenticated()) {
+    res.redirect('/bookings')
+  } else {
+    res.redirect('../auth/login')
+  }
 })
 // Export
 module.exports = router

@@ -8,7 +8,11 @@ router.get('/', (req, res) => {
 })
 
 router.get('/create', (req, res) => {
-  res.render('houses/create')
+  if (req.isAuthenticated()) {
+    res.render('./houses/create')
+  } else {
+    res.redirect('../auth/login')
+  }
 })
 
 router.get('/:id', (req, res) => {
@@ -16,13 +20,35 @@ router.get('/:id', (req, res) => {
 })
 
 router.get('/:id/edit', (req, res) => {
-  res.render('houses/edit')
+  if (req.isAuthenticated()) {
+    res.render('./houses/edit')
+  } else {
+    res.redirect('/auth/login')
+  }
 })
 
-router.post('/', (req, res) => {})
+router.post('/', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render('./houses')
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 
-router.patch('/:id', (req, res) => {})
+router.patch('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render('./houses')
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 
-router.delete('/:id', (req, res) => {})
+router.delete('/:id', (req, res) => {
+  if (req.isAuthenticated()) {
+    res.render('./houses')
+  } else {
+    res.redirect('/auth/login')
+  }
+})
 // Export
 module.exports = router
