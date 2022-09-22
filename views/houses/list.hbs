@@ -90,29 +90,29 @@
     <!-- start houses -->
     <div class="container py-4">
       <div class="row row-cols-4">
+				{{#each houses as |house|}}
         <!-- house 1 -->
         <div class="col">
           <div class="card mb-4">
             <img
-              src="https://res.cloudinary.com/dsko6ntfj/image/upload/v1640295026/portal/web%20development%20beginners/05%20Project%20Airbnb/house%2001/house_01_01.png
-
-"
+              src={{photos.[0]}}
               class="card-img-top"
               alt="..."
             />
             <div class="card-body">
               <small
-                ><i class="fa-solid fa-thumbs-up"></i> Koh Samui • 4 Rooms
+                ><i class="fa-solid fa-thumbs-up"></i> {{house.location}} • {{house.rooms}} Rooms
               </small>
-              <h5 class="card-title text-start">Luxary Villa in Chaweng</h5>
+              <h5 class="card-title text-start">{{house.title}}</h5>
               <div class="row">
                 <div class="col text-start"><small>0 Reviews</small></div>
-                <div class="col text-end"><small>$350/night</small></div>
+                <div class="col text-end"><small>${{house.price}}/night</small></div>
                 <a href="/houses/{{house._id}}" class="stretched-link"></a>
               </div>
             </div>
           </div>
         </div>
+				{{/each}}
 				<!-- end of house -->
       </div>
     </div>

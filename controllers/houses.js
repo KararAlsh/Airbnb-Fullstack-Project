@@ -3,9 +3,10 @@ const express = require('express')
 const router = express.Router()
 const Houses = require('../models/houses.js')
 //get controller
-router.get('/', (req, res) => {
-  let loggedUser = req.user
-  res.render('houses/list', { loggedUser })
+router.get('/', async (req, res) => {
+  let houses = await Houses.find({})
+  console.log(houses)
+  res.render('houses/list', { houses })
 })
 
 router.get('/create', (req, res) => {
@@ -13,7 +14,7 @@ router.get('/create', (req, res) => {
     let loggedUser = req.user
     res.render('./houses/create', { loggedUser })
   } else {
-    res.redirect('../auth/login')
+    res.redirect('/auth/login')
   }
 })
 
