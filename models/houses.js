@@ -8,15 +8,11 @@ module.exports = mongoose.model('houses', {
     required: true
   },
   host: {
-    type: _id,
+    type: ObjectId,
     required: true,
     ref: 'users'
   },
   location: {
-    type: String,
-    required: true
-  },
-  password: {
     type: String,
     required: true
   },

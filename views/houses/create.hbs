@@ -5,68 +5,77 @@
     <div class="container">
       <div class="row">
         <div class="col">
-          <form>
+          <form action="/houses" method="post">
             <h3 class="mt-5">List a house</h3>
             <label class="form-label mb-0">Short Title</label>
-            <input type="text" class="form-control mb-3" />
+            <input name="title" type="text" class="form-control mb-3" />
             <label class="form-label mb-0">Description</label>
-            <textarea rows="5" class="form-control mb-3"></textarea>
+            <textarea name="description" rows="5" class="form-control mb-3"></textarea>
             <label class="form-label mb-0">Number of Rooms</label>
-            <input type="number" class="form-control mb-3" />
+            <input name="rooms" type="number" class="form-control mb-3" />
             <label class="form-label mb-0">Location</label>
-            <select class="form-select mb-3">
+            <select name="location" class="form-select mb-3">
               <option selected>Choose location</option>
               <option value="1">Koh Phangan</option>
               <option value="2">Koh Samui</option>
               <option value="3">Bali</option>
             </select>
             <label class="form-label mb-0">Price(per night)</label>
-            <input type="number" class="form-control mb-3" />
+            <input name="price" type="number" class="form-control mb-3" />
             <label class="form-label mb-0">Add Photos(up to 9)</label>
             <input
+							name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
               class="form-control mb-1"
-              placeholder="http..."
+              placeholder="http://..."
             />
             <input
+              name="photos"
               type="text"
-              class="form-control mb-3"
-              placeholder="http..."
+              class="form-control mb-1"
+              placeholder="http://..."
             />
             <button class="btn btn-success mb-5">Submit</button>
           </form>

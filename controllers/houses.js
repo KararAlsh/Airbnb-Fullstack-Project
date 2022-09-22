@@ -1,7 +1,7 @@
 // Import Packages
 const express = require('express')
 const router = express.Router()
-
+const Houses = require('../models/houses.js')
 //get controller
 router.get('/', (req, res) => {
   let loggedUser = req.user
@@ -31,13 +31,24 @@ router.get('/:id/edit', (req, res) => {
   }
 })
 
-router.post('/', (req, res) => {
-  if (req.isAuthenticated()) {
-    let loggedUser = req.user
-    res.render('./houses', { loggedUser })
-  } else {
+router.post('/', async (req, res, next) => {
+  if (!req.isAuthenticated()) {
     res.redirect('/auth/login')
   }
+
+  console.log(req.body)
+
+  // creating house
+  let host = req.user._id
+  const createdHouse = await Houses.create({
+    rooms: req.body.rooms,
+    price: req.body.price,
+    location: req.body.location,
+    description: req.body.description,
+    title: req.body.title,
+    host: host
+  })
+  res.redirect(`/houses/${createdHouse._id}`)
 })
 
 router.patch('/:id', (req, res) => {
