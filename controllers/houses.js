@@ -4,9 +4,10 @@ const router = express.Router()
 const Houses = require('../models/houses.js')
 //get controller
 router.get('/', async (req, res) => {
+  let loggedUser = req.user
   let houses = await Houses.find({})
   console.log(houses)
-  res.render('houses/list', { houses })
+  res.render('houses/list', { loggedUser, houses })
 })
 
 router.get('/create', (req, res) => {
