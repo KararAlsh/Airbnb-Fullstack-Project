@@ -17,9 +17,12 @@ router.get('/create', (req, res) => {
   }
 })
 
-router.get('/:id', (req, res) => {
+router.get('/:id', async (req, res) => {
+  const house = await Houses.findById(req.params.id).populate('host')
+  console.log(house)
   let loggedUser = req.user
-  res.render('houses/one', { loggedUser })
+
+  res.render('houses/one', { loggedUser, house })
 })
 
 router.get('/:id/edit', (req, res) => {
@@ -46,6 +49,7 @@ router.post('/', async (req, res, next) => {
     location: req.body.location,
     description: req.body.description,
     title: req.body.title,
+    photos: req.body.photos,
     host: host
   })
   res.redirect(`/houses/${createdHouse._id}`)
