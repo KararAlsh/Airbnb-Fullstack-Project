@@ -3,7 +3,7 @@
     <!-- Start of filter/form -->
     <div class="bg-light">
       <div class="container">
-        <form>
+        <form action="/houses" method="get">
           <div class="row pt-2">
             <div class="col">
               <div class="input-group input-group-sm mb-3">
@@ -11,13 +11,14 @@
                   ><i class="fa-solid fa-location-dot"></i
                 ></span>
                 <select
+									name="location"
                   class="form-select form-select-sm"
                   aria-label="Default select example"
                 >
-                  <option selected>Any Location</option>
-                  <option value="1">Koh Phangan</option>
-                  <option value="2">Koh Samui</option>
-                  <option value="3">Bali</option>
+                  <option selected>Any location</option>
+                  <option>Koh Phangan</option>
+                  <option>Koh Samui</option>
+                  <option>Bali</option>
                 </select>
               </div>
             </div>
@@ -27,6 +28,7 @@
                   ><i class="fa-solid fa-house-chimney"></i
                 ></span>
                 <select
+									name="rooms"
                   class="form-select form-select-sm"
                   aria-label="Default select example"
                 >
@@ -45,6 +47,7 @@
                   ><i class="fa-sharp fa-solid fa-dollar-sign"></i
                 ></span>
                 <input
+									name="price"
                   type="number"
                   class="form-control"
                   aria-label="Sizing example input"
@@ -58,11 +61,12 @@
                   ><i class="fa-solid fa-sort"></i
                 ></span>
                 <select
+									name="sort"
                   class="form-select form-select-sm"
                   aria-label="Default select example"
                 >
-                  <option selected>Price(low to high)</option>
-                  <option value="1">Price(high to low)</option>
+                  <option value="price">Price(low to high)</option>
+                  <option value="-price">Price(high to low)</option>
                 </select>
               </div>
             </div>
