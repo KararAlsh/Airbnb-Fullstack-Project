@@ -10,7 +10,7 @@
 						/></a>
           </div>
           <div class="col text-end">
-						{{#if loggedUser}}<a name="name" href="/profile" class="btn btn-outline-secondary btn-sm">
+						{{#if loggedUser}}<a name="name" href="profile" class="btn btn-outline-secondary btn-sm">
               <img name="avatar"
               class="userlogo"src={{loggedUser.avatar}}><small
                 >{{loggedUser.name}}</small
@@ -19,7 +19,7 @@
             <a href="/auth/logout" class="btn btn-outline-secondary btn-sm">
               <small>Logout</small></a
             >{{else}}
-						  <a href="auth/login" class="btn btn-outline-secondary btn-sm">
+						  <a href="/auth/login" class="btn btn-outline-secondary btn-sm">
 	              <small>Login</small></a
 	            >
 						{{/if}}
