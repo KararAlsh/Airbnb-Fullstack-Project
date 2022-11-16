@@ -8,4 +8,12 @@
     "indent": ["error", 2],
     "semi": ["error", "never"]
   }
+  "env": {
+    "node": true,
+    "es6": true
+  },
+
+  "parserOptions": {
+    "ecmaVersion": 8
+  }
 }
