@@ -3,12 +3,12 @@
     <div class="container mt-4">
       <div class="row">
         <div class="col-3">
-          <form>
+          <form action="/profile?_method=PATCH" method="POST">
             <h2 class="border-bottom pb-3">Profile</h2>
             <label class="form-label mb-0"><small>Name</small></label>
-            <input type="text" class="form-control mb-3" value="{{loggedUser.name}}" />
+            <input name="name" type="text" class="form-control mb-3" value="{{loggedUser.name}}" />
             <label class="form-label mb-0"><small>Email</small></label>
-            <input type="email" class="form-control mb-3" value="{{loggedUser.email}}"/>
+            <input name="email" type="email" class="form-control mb-3" value="{{loggedUser.email}}"/>
             <label class="form-label mb-0"
               ><small>Profile Picture</small></label
             >
@@ -16,7 +16,7 @@
               <img class="userlogo-profile-pg
               my-2"src={{loggedUser.avatar}}>
             </div>
-            <input type="text" class="form-control mb-3" value="{{loggedUser.avatar}}"/>
+            <input name="avatar" type="text" class="form-control mb-3" value="{{loggedUser.avatar}}"/>
             <div>
               <button class="btn btn-success btn-sm">
                 Save Changes
