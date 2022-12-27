@@ -10,10 +10,10 @@
 						/></a>
           </div>
           <div class="col text-end">
-						{{#if loggedUser}}<a name="name" href="profile" class="btn btn-outline-secondary btn-sm">
+						{{#if auth}}<a name="name" href="profile" class="btn btn-outline-secondary btn-sm">
               <img name="avatar"
-              class="userlogo"src={{loggedUser.avatar}}><small
-                >{{loggedUser.name}}</small
+              class="userlogo"src={{user.avatar}}><small
+                >{{user.name}}</small
               ></a
             >
             <a href="/auth/logout" class="btn btn-outline-secondary btn-sm">

@@ -1,8 +1,13 @@
-// Schema for users
+// Packages
+const express = require('express')
+const router = express.Router()
 const mongoose = require('mongoose')
 
+// Model
 module.exports = mongoose.model('users', {
-  avatar: String,
+  avatar: {
+    type: String
+  },
   email: {
     type: String,
     required: true
