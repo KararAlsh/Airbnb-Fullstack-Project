@@ -1,73 +1,110 @@
-{{> nav loggedUser=loggedUser}}
-    <!-- end top nav -->
-    <div class="container mt-4">
-      <div class="row">
-        <div class="col-3">
-          <form action="/profile?_method=PATCH" method="POST">
-            <h2 class="border-bottom pb-3">Profile</h2>
-            <label class="form-label mb-0"><small>Name</small></label>
-            <input name="name" type="text" class="form-control mb-3" value="{{loggedUser.name}}" />
-            <label class="form-label mb-0"><small>Email</small></label>
-            <input name="email" type="email" class="form-control mb-3" value="{{loggedUser.email}}"/>
-            <label class="form-label mb-0"
-              ><small>Profile Picture</small></label
+<body>
+	<!-- nav -->
+	{{> nav}}
+  <!-- houses form -->
+  <div class="container text-center">
+    <div class="row text-start">
+      <div class="col-4">
+		   <!-- profile section -->
+        <h2 class="border-bottom pb-3">Profile</h2>
+        <form action="/profile?_method=PATCH" method="post">
+					<!-- name -->
+          <div class="mb-3">
+            <label class="form-label"
+              >Full Name</label
             >
-            <div class="">
-              <img class="userlogo-profile-pg
-              my-2"src={{loggedUser.avatar}}>
-            </div>
-            <input name="avatar" type="text" class="form-control mb-3" value="{{loggedUser.avatar}}"/>
-            <div>
-              <button class="btn btn-success btn-sm">
-                Save Changes
-              </button>
-            </div>
-          </form>
-        </div>
-        <div class="col-7 offset-2">
-          <h2 class="border-bottom pb-3">My Listings</h2>
-          <div>
-						<a href="/houses/create"><button class="btn btn-success btn-sm mb-3 mt-1">
-              List a house
-            </button></a>
-            <!-- card 1 -->
-						{{#each houses as |house|}}
-            <div class="card mb-3" style="max-width: 540px;">
-              <div class="row g-0">
-                <div class="col-md-4">
-                  <img
-                    src={{photos.[0]}}
-                    class="img-fluid rounded-start"
-                    alt="..."
-                  />
-                </div>
-                <div class="col-md-8">
-                  <div class="card-body">
-                    <h5 class="card-title">{{house.title}}</h5>
-                    <small class="text-muted">{{house.location}} • {{house.rooms}}</small>
-                    <p class="card-text">
-                      {{house.description}}
-                    </p>
-                    <a
-                      href="/houses/{{house._id}}/edit"
-                      class="btn btn-outline-secondary btn-sm"
-                    >
-                      <small>Edit</small></a
-                    >
-                    <a href="/houses/{{house._id}}" class="btn btn-outline-secondary btn-sm">
-                      <small>View</small></a
-                    >
-                  </div>
-                </div>
-              </div>
-            </div>
-						{{/each}}
-            <!-- end of card 1 -->
-            <!-- if u dont have any houses listed -->
-            <!-- <div class="alert alert-light border border-light" role="alert">
-              You don't have any houses listed
+            <input
+              type="text"
+							name="name"
+              class="form-control"
+							value="{{user.name}}"
+            />
+          </div>
+					<!-- email -->
+          <div class="mb-3">
+            <label class="form-label"
+              >Email</label
+            >
+            <input
+              type="email"
+							name="email"
+              class="form-control"
+							value="{{user.email}}"
+            />
+            <!-- <div id="emailHelp" class="form-text">
+              We'll never share your email with anyone else.
             </div> -->
           </div>
-        </div>
+					<!-- avatar -->
+					<div class="mb-3">
+            <label class="form-label"
+              >Profile Picture</label
+            >
+						<img src="{{user.avatar}}" alt="profile picture" class="userlogo-profile-pg
+              my-2">
+            <input
+              type="text"
+							name="avatar"
+              class="form-control"
+							value="{{user.avatar}}"
+            />
+          </div>
+          <button class="btn btn-success btn-sm"> Save Changes
+              </button>
+        </form>
       </div>
+      <!-- end profile section -->
+      <div class="col-8 ps-5">
+        <!-- listings section -->
+        <h2 class="border-bottom mb-3 pb-3">My Listings</h2>
+				<a href="houses/create">
+        	<button class="btn btn-success btn-sm mb-3 mt-1">
+              List a house
+            </button></a>
+				{{#if noListings}}
+	        <!-- no listings -->
+	        <div class="card mb-3">
+	          <ul class="list-group list-group-flush">
+	            <li class="list-group-item">You don't have any houses listed</li>
+	          </ul>
+	        </div>
+				{{else}}
+	        <!-- with listings -->
+					{{#each listings as |listing|}}
+	        	<div class="card mb-3">
+	          <div class="row g-0">
+	            <div class="col-md-4">
+	              <img src="{{listing.photos.[0]}}" class="img-fluid rounded-start house-img card-img" alt="house main image" />
+	            </div>
+	            <div class="col-md-8">
+	              <div class="card-body">
+	                <h5 class="card-title">{{listing.title}}</h5>
+									<!-- listing rooms and rate inline - match block with houses card -->
+									<span>{{listing.location}} Rooms • ${{listing.price}}/night</span>
+	                <p class="card-text">
+	                  {{listing.description}}
+	                </p>
+									<div class="row">
+										<!-- ! could make the spacing on these nicer -->
+										<div class="col">
+											<form action="houses/{{listing._id}}/edit" method="get">
+												<button name="listingID" value="{{listing._id}}" class="btn btn-success mb-3">Edit</button>
+											</form>
+										</div>
+										<div class="col">
+											<a href="houses/{{listing._id}}" class="btn btn-success mb-3">
+												View
+											</a>
+										</div>
+									</div>
+	              </div>
+	            </div>
+	          </div>
+	        	</div>
+					{{/each}}
+				{{/if}}
+      </div>
+      <!-- end listing section -->
     </div>
+  </div>
+</body>
