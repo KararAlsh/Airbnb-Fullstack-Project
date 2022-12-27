@@ -1,73 +1,103 @@
-// Import Packages
+// Packages
 const express = require('express')
 const router = express.Router()
-const users = require('../models/users')
+// Models
+const Users = require('../models/users')
 
-// controller routes
-
-router.get('/login', (req, res) => {
-  res.render('login')
-})
-
-router.get('/signup', (req, res) => {
-  res.render('signup')
-})
-// to log in
-router.post('/login', async (req, res, next) => {
+// Root
+router.get('/', async (req, res) => {
   try {
-    let foundUser = await users.findOne({
-      email: req.body.email,
-      password: req.body.password
-    })
-    if (foundUser) {
-      req.login(foundUser, err => {
-        if (err) {
-          throw new Error('Email or password might be wrong, try again')
-        } else {
-          res.redirect('/houses')
-        }
-      })
-    } else {
-      throw new Error('Email or password might be wrong, try again')
-    }
+    res.redirect('/houses')
   } catch (err) {
-    next(err)
+    // !!! properly
+    res.redirect('/error')
   }
 })
-// end of log in
-// to sign up
-router.post('/signup', async (req, res, next) => {
+
+// Get login
+router.get('/login', async (req, res) => {
   try {
-    if (
-      await users.findOne({
-        email: req.body.email
-      })
-    ) {
-      throw new Error('User with this email already exists')
-    } else {
-      let user = await users.create(req.body)
+    // !!! if alrady authed, redirect to houses page
+    res.render('../views/login')
+  } catch (err) {
+    // !!! properly
+    res.redirect('/error')
+  }
+})
+
+// Get signup
+router.get('/signup', async (req, res) => {
+  try {
+    res.render('../views/signup')
+  } catch (err) {
+    // !!! properly
+    res.redirect('/error')
+  }
+})
+
+// Post login
+router.post('/login', async (req, res) => {
+  try {
+    let user = await Users.findOne(req.body)
+    if (user) {
       req.login(user, err => {
-        if (err) throw new Error(err)
-        else res.redirect('/houses')
+        if (err) {
+          throw 'error'
+          //!!!properly - user already exists, go login, or else...
+          // email or password is incorrect (if no match found, display this... (with signup/forgot passwrod option))
+        }
+        res.redirect('../houses')
       })
+    } else {
+      console.log('uh oh - throw email/pw error here - !!! properly')
     }
   } catch (err) {
-    next(err)
-    return
+    // !!! properly
+    res.redirect('/error')
   }
 })
-// end of signup
-// to logout
-router.get('/logout', (req, res) => {
-  req.logout()
-  req.session.destroy(err => {
-    if (err) {
-      next(err)
+
+// Post signup
+router.post('/signup', async (req, res) => {
+  try {
+    let user = await Users.create(req.body)
+    // !!! (exact copy, make better)
+    // !!! display better - user already exists - login?
+    user = await Users.findOne(req.body)
+    if (user) {
+      req.login(user, err => {
+        if (err) {
+          throw 'error' //!!!properly - user already exists, go login, or else...
+        }
+        res.redirect('/houses')
+      })
+    } else {
+      console.log('throw email/pw error here - !!! properly')
     }
-    res.clearCookie('connect.sid')
-    res.redirect('login')
-  })
+    // redirect to houses route
+  } catch (err) {
+    // !!! properly
+    res.redirect('/error')
+  }
 })
-// end of logout
+
+// Get logout
+router.get('/logout', async (req, res) => {
+  try {
+    req.logout()
+    req.session.destroy(err => {
+      if (err) {
+        next(err)
+      }
+      res.clearCookie('connect.sid')
+      console.log('logged out')
+      res.redirect('/auth/login')
+    })
+  } catch (err) {
+    // !!! properly
+    res.redirect('/error')
+  }
+})
+
 // Export
 module.exports = router
