@@ -49,7 +49,3 @@
 .bg-light {
 	padding-top: 13px;
 }
-
-.row-cols-4 > * {
-	padding-bottom: 25px;
-}

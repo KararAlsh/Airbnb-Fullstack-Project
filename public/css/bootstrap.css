@@ -705,6 +705,7 @@ progress {
 .row-cols-4 > * {
   flex: 0 0 auto;
   width: 25%;
+	padding-bottom: 25px;
 }
 
 .row-cols-5 > * {
