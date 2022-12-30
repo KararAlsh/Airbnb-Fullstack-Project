@@ -1,12 +1,15 @@
-// Schema for reviews
+// Packages
+const express = require('express')
+const router = express.Router()
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId
 
+// Model
 module.exports = mongoose.model('bookings', {
   author: {
     type: ObjectId,
-    required: true,
-    ref: 'users'
+    reference: 'users',
+    required: true
   },
   date: {
     type: Date,
@@ -19,7 +22,7 @@ module.exports = mongoose.model('bookings', {
   },
   house: {
     type: ObjectId,
-    required: true,
-    ref: 'houses'
+    reference: 'houses',
+    required: true
   }
 })
