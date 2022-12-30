@@ -1,35 +1,36 @@
-{{> nav loggedUser=loggedUser}}
-
-    <!-- end top nav -->
-    <!-- column 1 -->
-    <div class="container border border-light house">
-      <div class="row border border-light">
-        <div class="col">
-          <img
-            src="{{house.photos.[0]}}"
-            class="card-img-top"
-            alt="..."
-          />
-        </div>
-        <!-- end of column 1 -->
-        <!-- column 2 -->
-        <div class="col">
-          <div class="row row-cols-3 g-3 p-5">
+{{> nav}}
+  <!-- image pane -->
+  <div class="border-bottom"></div>
+  <div class="container text-center">
+    <div class="row">
+      <!-- large image -->
+			<!-- first photo in house.photos[0] -->
+      <div class="col">
+        <img
+          class="img-lg img-fluid"
+					id="bigPic"
+          src="{{house.photos.[0]}}"
+          alt=""
+        />
+      </div>
+      <div class="col d-flex align-items-center">
+        <div class="container">
+          <div class="row row-cols-3">
 						{{#each house.photos as |photo|}}
-            <div class="col">
-              <img
-                src="{{photo}}"
-                class="card-img-top"
-                alt="..."
-              />
-            </div>
+	            <div class="col">
+	              <img
+	                class="img-lg img-fluid p-1"
+	                src={{photo}}
+									onclick="setBigPic(this)"
+	              />
+	            </div>
 						{{/each}}
           </div>
         </div>
-        <!-- end of column 2 -->
-        <!-- new section -->
       </div>
     </div>
+  </div>
+	  <!-- main-sidebar -->
     <div class="container border border-light house">
       <div class="row mt-4">
         <!-- column 1 Without reviews -->
@@ -42,7 +43,7 @@
             <div class="col-1">
               <div class="">
                 <img class="userlogo-profile-pg
-                my-2"src=https://randomuser.me/api/portraits/men/11.jpg>
+                my-2"src={{user.avatar}}>
               </div>
             </div>
             <div class="col-2">
@@ -55,24 +56,74 @@
           <p>
             {{house.description}}
           </p>
-          <div class="mt-5">
-            <h2>0 Reviews</h2>
-            <form>
-              <label class="form-label mb-0">Leave a review</label>
-              <textarea rows="5" class="form-control mb-3"></textarea>
-              <div>
-                <button type="button" class="btn btn-outline-success">
-                  <i class="fa-solid fa-thumbs-up"></i>
-                </button>
-                <button type="button" class="btn btn-outline-danger">
-                  <i class="fa-solid fa-thumbs-down"></i>
-                </button>
+					<!-- reviews -->
+        <!-- reviews -->
+            <div class="" name="listing-reviews">
+              <!-- review detail/form -->
+							<!-- !!! form blanking if review already sent -->
+              <h2>{{reviewCount}} reviews</h2>
+              <form action="/reviews" method="post">
+								<input type="hidden" value="{{house._id}}" name="house" />
+                <span>Leave a review</span>
+                <div class="input-group">
+                  <textarea
+                  	rows="5"
+                    class="form-control"
+                    placeholder="Send the host a message..."
+										name="description"
+                  ></textarea>
+                </div>
+                <div>
+								<!-- THUMBS UP -->
+								<input type="radio" class="btn-check" name="rating" id="success-outlined" value="1">
+									<label class="btn btn-outline-success" for="success-outlined"><i class="fa-solid fa-thumbs-up"></i></label>
+								<!-- THUMBS DOWN -->
+								<input type="radio" class="btn-check" name="rating" id="danger-outlined" value="-1">
+								<label class="btn btn-outline-danger" for="danger-outlined"><i class="fa-solid fa-thumbs-down"></i></label>
               </div>
-              <button class="btn btn-success mb-5 mt-1">
+                <button class="btn btn-success mb-5 mt-1">
                 Submit
               </button>
-            </form>
-          </div>
+              </form>
+              <!-- existing reviews -->
+              <!-- !!! once 'hosted by' block is perfect, nick it, then place review text underneath -->
+							{{#each reviews as |review|}}
+	              <div class="card mb-4">
+	                <div class="row">
+	                  <div class="col-1">
+											<img src="{{review.author.avatar}}" class="userlogo-profile-rw"/>
+										</div>
+	                  <div class="col-11">
+	                    <div class="card-body">
+	                      <div class="container p-0">
+	                        <div class="row">
+	                          <div class="col">
+															<small>{{review.date}}</small>
+	                          </div>
+	                          <div class="col text-end">
+															<!-- !!! styling required + blank for neutral score -->
+															{{#ifEq review.rating 0}}
+																<p>score 0</p>
+															{{/ifEq}}
+															{{#ifGt review.rating 0}}
+																<i class="fa-solid fa-thumbs-up mx-2 my-2"></i>
+															{{/ifGt}}
+															{{#ifLt review.rating 0}}
+																<i class="fa-solid fa-thumbs-down mx-2 my-2"></i>
+															{{/ifLt}}
+	                          </div>
+	                        </div>
+	                      </div>
+												<h5>{{review.author.name}}</h5>
+	                      <p class="card-text">
+	                        {{review.description}}
+	                      </p>
+	                    </div>
+	                  </div>
+	                </div>
+	              </div>
+							{{/ each}}
+            </div>
         </div>
         <!-- without reviews end -->
         <!-- end of column 1 -->
@@ -140,41 +191,48 @@
             </div>
           </div>
         </div> -->
-        <!-- colum 2 without reviews-->
-        <div class="col-4 offset-1">
+        <!-- booking section-->
+        <div class="col-4 offset-1 mb-3">
           <div class="card" style="width: 25rem;">
             <div class="card-body">
               <h4 class="card-title">${{house.price}}/night</h4>
-              <small class="card-subtitle mb-2 text-muted"> 0 reviews</small>
-              <textarea
-                rows="4"
-                class="form-control mb-3"
-                placeholder="Send the host a message..."
-              ></textarea>
-              <button type="button" class="btn btn-success mb-5">
-                Request Booking
-              </button>
-            </div>
+            <h6 class="card-subtitle mb-2 text-muted">
+              <small>
+								<!-- !!! same as above -->
+								{{#ifEq score 0}}
+									<p>score 0</p>
+								{{/ifEq}}
+								{{#ifGt score 0}}
+									<i class="fa-solid fa-thumbs-up mx-2 my-2"></i>
+								{{/ifGt}}
+								{{#ifLt score 0}}
+									<i class="fa-solid fa-thumbs-down mx-2 my-2"></i>
+								{{/ifLt}}
+								<!-- !!! needs s added/removed if 1 -->
+                {{reviewCount}}
+                Reviews</small
+              >
+            </h6>
+						<!-- booking exists -->
+						{{#if bookingExists}}
+							<div class="p-3 mb-2 bg-success text-white">Booking request sent!</div>
+						{{else}}
+							<!-- no booking yet -->
+							<form action="/bookings" method="post">
+								<div class="input-group">
+									<textarea
+										class="form-control"
+										name="description"
+										placeholder="Send the host a message..."
+									></textarea>
+								</div>
+								<input type="hidden" value="{{house._id}}" name="house" />
+								<button class="btn btn-success my-2">Request Booking</button>
+							</form>
+						{{/ if}}
           </div>
         </div>
-        <!-- end of column 2 -->
-        <!-- colum 2 withreviews-->
-        <!-- <div class="col-4 offset-1">
-          <div class="card" style="width: 25rem;">
-            <div class="card-body">
-              <h4 class="card-title">$350/night</h4>
-              <small class="card-subtitle mb-2 text-muted"
-                ><i class="fa-solid fa-thumbs-up"></i> 1 reviews</small
-              >
-              <div class="alert alert-success mt-2" role="alert">
-                Thank you for your enquiry.
-                <div>
-                  <small>Sent on 02 June 1998 - 01:01</small>
-                </div>
-              </div>
-            </div>
-          </div>
-        </div> -->
-        <!-- end of column 2 -->
+       </div>
+      <!-- end booking section -->
       </div>
     </div>
