@@ -1,31 +1,37 @@
-// Schema for houses
+// Packages
+const express = require('express')
+const router = express.Router()
 const mongoose = require('mongoose')
 const ObjectId = mongoose.Schema.Types.ObjectId
 
+// Model
 module.exports = mongoose.model('houses', {
+  title: {
+    type: String,
+    required: true
+  },
   description: {
     type: String,
-    required: true
-  },
-  host: {
-    type: ObjectId,
-    ref: 'users'
-  },
-  location: {
-    type: String,
-    required: true
-  },
-  photos: [String],
-  price: {
-    type: Number,
     required: true
   },
   rooms: {
     type: Number,
     required: true
   },
-  title: {
+  location: {
     type: String,
     required: true
+  },
+  price: {
+    type: Number,
+    required: true
+  },
+  photos: {
+    type: []
+  },
+  host: {
+    type: ObjectId,
+    required: true,
+    ref: 'users'
   }
 })
