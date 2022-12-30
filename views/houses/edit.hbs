@@ -1,80 +1,72 @@
-{{> nav loggedUser=loggedUser}}
-    <!-- end top nav -->
-    <!-- start of the form -->
-    <div class="container">
-      <div class="row">
-        <div class="col">
-          <form>
-            <h3 class="mt-5">Edit house</h3>
-            <label class="form-label mb-0">Short Title</label>
-            <input type="text" class="form-control mb-3" />
-            <label class="form-label mb-0">Description</label>
-            <textarea rows="5" class="form-control mb-3"></textarea>
-            <label class="form-label mb-0">Number of Rooms</label>
-            <input type="number" class="form-control mb-3" />
-            <label class="form-label mb-0">Location</label>
-            <select class="form-select mb-3">
-              <option>Choose location</option>
-            </select>
-            <label class="form-label mb-0">Price(per night)</label>
-            <input type="number" class="form-control mb-3" />
-            <label class="form-label mb-0">Photos(up to 9)</label>
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-1"
-              placeholder="http..."
-            />
-            <input
-              type="text"
-              class="form-control mb-3"
-              placeholder="http..."
-            />
-            <div>
-              <button class="btn btn-success mb-3">
-                Save Changes
-              </button>
-            </div>
-          </form>
-          <div>
-            <button type="button" class="btn btn-danger mb-5">
-              Delete House
-            </button>
-          </div>
-        </div>
+<body>
+	<!-- nav -->
+	{{> nav}}
+  <!-- houses form -->
+  <!-- create listing form -->
+  <div class="container mb-5">
+    <!-- Content here -->
+    <form action="/houses/{{house._id}}?_method=PATCH" method="post">
+      <h1>Edit a House</h1>
+      <div class="mb-3">
+        <label class="form-label">Short Title</label>
+        <input type="text" class="form-control" name="title" value="{{house.title}}" required />
       </div>
-    </div>
+      <div class="mb-3">
+        <label class="form-label">Description</label>
+        <textarea
+          class="form-control"
+          name="description"
+          rows="7"
+					required
+        >{{house.description}}</textarea>
+      </div>
+      <div class="mb-3">
+        <span>Number of Rooms</span>
+        <input name="rooms" value="{{house.rooms}}" type="number" class="form-control" required />
+      </div>
+      <!-- Location - select -->
+			      <div class="mb-3">
+      <div class="input-group">
+								<label class="form-label">Location</label>
+				<div class="input-group">
+					<span class="input-group-text">
+						<i class="fa-solid fa-location-dot"></i
+					></span>
+					<select
+						class="form-select"
+						name="location"
+						required
+					>
+					<!-- !!! Remove 'any location' from options on create, then remove here -->
+						<option {{#ifEq house.location "Any Location"}} selected {{/ifEq}} >Any Location</option>
+						<option {{#ifEq house.location "Koh Samui"}} selected {{/ifEq}} >Koh Samui</option>
+						<option {{#ifEq house.location "Koh Phangan"}} selected {{/ifEq}} >Koh Phangan</option>
+						<option {{#ifEq house.location "Koh Tao"}} selected {{/ifEq}} >Koh Tao</option>
+					</select>
+				</div>
+      </div>
+      <!-- Price - !!! fix $ icon bit  -->
+      <div class="mb 3">
+        <label class="form-label">Price (per night)</label>
+				<div class="input-group">
+        	<span class="input-group-text fw-bold">$</span>
+        	<input type="number" name="price" value="{{house.price}}" class="form-control" required />
+				</div>
+      </div>
+      <div class="mb-3">
+        <label class="form-label">Add Photos (up to 9)</label>
+				{{#each house.photos as |photo|}}
+	        <input
+						name="photos"
+	          type="text"
+	          class="mb-2 form-control"
+	          placeholder="http://..."
+	          value="{{photo}}"
+	        />
+				{{/each}}
+      </div>
+      <button class="btn btn-success" name="command" value="update">Update</button>
+			<button class="btn btn-success" name="command" value="delete">Delete</button>
+    </form>
+  </div>
+</body>
