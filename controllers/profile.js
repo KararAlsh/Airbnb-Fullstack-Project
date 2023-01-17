@@ -2,35 +2,47 @@
 const express = require('express')
 const router = express.Router()
 // models
-const Users = require('../models/users.js')
 const Houses = require('../models/houses.js')
+
 //get controller
-
 router.get('/', async (req, res) => {
-  let loggedUser = req.user
-  if (req.isAuthenticated()) {
-    let houses = await Houses.find({
-      host: req.user._id
-    })
-    res.render('profile', { loggedUser, houses })
-  } else {
-    res.redirect('../auth/login')
+  try {
+    if (req.isAuthenticated()) {
+      // Use the GET /profile to also find in the database all houses that are listed by the user (using the host field),
+      // !!! sort them on something? add date to model and sort on most recent?
+      // console.log(req.user._id)
+      let listings = await Houses.find({ host: req.user._id })
+      let noListings = listings.length == 0 ? true : false
+      res.render('../views/profile', {
+        user: {
+          name: req.user.name,
+          avatar: req.user.avatar,
+          email: req.user.email
+        },
+        auth: req.isAuthenticated(), // !!! what's this for again?
+        listings,
+        noListings
+      })
+    } else {
+      res.redirect('/auth/login')
+    }
+  } catch (err) {
+    res.redirect('/error')
   }
 })
 
-router.patch('/profile', async (req, res) => {
-  let loggedUser = req.user
-  if (req.isAuthenticated()) {
-    // refreshing with new data through the form using findByIdAndUpdate
-    let user = await Users.findByIdAndUpdate(req.user._id, req.body, {
-      new: true
-    })
-    req.login(user, err => {
-      res.redirect('/profile')
-    })
-  } else {
-    res.redirect('../auth/login')
+// Patch root
+router.patch('/', async (req, res) => {
+  try {
+    if (req.isAuthenticated()) {
+      res.render('../views/profile')
+    } else {
+      res.redirect('/auth/login')
+    }
+  } catch (err) {
+    res.redirect('/error')
   }
 })
+
 // Export
 module.exports = router
